@@ -1,8 +1,5 @@
-### `Makefile`
-
-```Makefile
 APP_NAME = averagecalculator
-IMAGE_NAME = quay.io/your-username/$(APP_NAME):latest
+IMAGE_NAME = quay.io/rh-ee-sakkulka/$(APP_NAME):latest
 
 all: build
 
@@ -17,7 +14,7 @@ test:
 
 
 Podman-build:
-	docker build -t $(IMAGE_NAME) .
+	podman build -t $(IMAGE_NAME) .
 
 Podman-run:
 	podman run -p 8080:9901 $(IMAGE_NAME)

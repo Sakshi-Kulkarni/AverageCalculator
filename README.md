@@ -109,7 +109,10 @@ Directory Structure
 ``` bash
 AverageCalculator/
 ├── handler/          # Contains the main HTTP handler logic
-├── tests/            # Unit and integration tests
+├──── handler_test.go          
+├── average/
+├──── average_test.go
+├── utils/             
 ├── Dockerfile        # Dockerfile for containerization
 ├── Makefile          # Makefile for common tasks
 └── README.md         # Project documentation
@@ -170,11 +173,11 @@ The testing suite includes:
 ## 🐳 Podman Usage
 **Build Podman Image**
 ```bash
-make docker-build
+make Podman-build
 ```
 Run Podman Container
 ```bash
-make docker-run
+make Podman-run
 ```
 The app will be available at:http://localhost:9901.
 
