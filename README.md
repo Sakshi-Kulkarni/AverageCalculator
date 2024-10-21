@@ -6,6 +6,12 @@
 ![Podman](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Red Hat](https://img.shields.io/badge/Red%20Hat-Compatible-EE0000?style=for-the-badge&logo=red-hat&logoColor=white)
 [![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Passing-4CAF50?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/yourusername/even-number-average/actions)
+ ![Build Status](https://img.shields.io/github/actions/workflow/status/sakshi-kulkarni/AverageCalculator/ci.yml?branch=main&color=green)
+![Coverage Status](https://img.shields.io/codecov/c/github/sakshi-kulkarni/AverageCalculator?color=green)
+![Go Version](https://img.shields.io/github/go-mod/go-version/sakshi-kulkarni/AverageCalculator?color=green&logo=go)
+![OpenShift Version](https://img.shields.io/badge/OpenShift-v4.10+-green?logo=redhatopenshift)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat)
+
 ![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
 
