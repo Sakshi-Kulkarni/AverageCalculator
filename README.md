@@ -3,7 +3,6 @@
 
 # 🚀 Average Calculator
 ![Go Version](https://img.shields.io/badge/Go-1.22-00ADD8?style=for-the-badge&logo=go&logoColor=white)
-![Podman](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Red Hat](https://img.shields.io/badge/Red%20Hat-Compatible-EE0000?style=for-the-badge&logo=red-hat&logoColor=white)
 [![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Passing-4CAF50?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/yourusername/even-number-average/actions)
  ![Build Status](https://img.shields.io/github/actions/workflow/status/sakshi-kulkarni/AverageCalculator/ci.yml?branch=main&color=green)
