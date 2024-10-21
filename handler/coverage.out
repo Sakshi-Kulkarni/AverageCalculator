@@ -1,0 +1,18 @@
+mode: set
+GO-TRAINING/handler/handler.go:14.61,15.33 1 1
+GO-TRAINING/handler/handler.go:15.33,18.3 2 1
+GO-TRAINING/handler/handler.go:20.2,31.23 4 1
+GO-TRAINING/handler/handler.go:31.23,35.3 3 1
+GO-TRAINING/handler/handler.go:37.2,40.36 3 1
+GO-TRAINING/handler/handler.go:40.36,43.3 2 1
+GO-TRAINING/handler/handler.go:45.2,45.51 1 1
+GO-TRAINING/handler/handler.go:45.51,47.17 2 1
+GO-TRAINING/handler/handler.go:47.17,49.4 1 1
+GO-TRAINING/handler/handler.go:52.2,55.16 4 1
+GO-TRAINING/handler/handler.go:56.11,57.38 1 1
+GO-TRAINING/handler/handler.go:58.11,59.37 1 1
+GO-TRAINING/handler/handler.go:60.11,61.34 1 1
+GO-TRAINING/handler/handler.go:62.10,64.9 2 1
+GO-TRAINING/handler/handler.go:67.2,67.16 1 1
+GO-TRAINING/handler/handler.go:67.16,70.3 2 1
+GO-TRAINING/handler/handler.go:70.8,72.3 1 1
