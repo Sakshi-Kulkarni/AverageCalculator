@@ -130,7 +130,7 @@ The testing suite includes:
 - **Unit Tests**: Focused on testing individual functions and handlers in isolation.Testing the `AverageHandler` with different inputs to ensure end-to-end functionality.
 - **Error Handling Tests**: Validates that the API returns appropriate error messages and status codes for invalid inputs (e.g., missing or malformed data).
 
-
+---
 ### Podman Usage
 **Build Image**
 ```bash
@@ -143,7 +143,7 @@ make podman-run
 The app will be available at:http://localhost:9901.
 
 ---
-## Deployment on OpenShift
+### Deployment on OpenShift
 - **Deploying the Application**
 ```bash
 oc new-app . --strategy=docker --name=average
@@ -156,7 +156,21 @@ To get the route, refer to the openshift-route target in the Makefile.
 ```bash
 make openshift-route
 ```
+---
+
+### Makefile Targets
+
+Available Commands
+- `make build` : Build the Go binary.
+- `make run`: Build and run the application.
+- `make test`: Run all tests.
+- `make podman-build`: Build Docker image with Podman.
+- `make podman-run`: Run the container with Podman.
+- `make quay-push`: Push image to Quay.io.
+- `make openshift-deploy`: Deploy to OpenShift (Docker strategy).
+- `make openshift-route`: Expose service and show route.
+- `make openshift-clean`: Clean up OpenShift resources.
 
 ---
 ## 📄 License
-This project is licensed under the MIT License. See the LICENSE file for more information.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/Sakshi-Kulkarni/AverageCalculator/blob/main/LICENSE) file for more information. 
