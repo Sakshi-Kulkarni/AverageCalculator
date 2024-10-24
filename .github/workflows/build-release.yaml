@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - 'v*'
+    branches:
+      - ops   
+
+
 jobs:
   build-release:
     name: Build
