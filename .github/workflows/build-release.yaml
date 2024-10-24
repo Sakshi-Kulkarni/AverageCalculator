@@ -67,7 +67,7 @@ jobs:
       - name: Build S2I Image
         run: |
           podman login quay.io -u ${{ secrets.QUAY_USERNAME }} -p ${{ secrets.QUAY_PASSWORD }}
-          s2i build . quay.io/rh-ee-sakkulka/s2i-avg-builder quay.io/rh-ee-sakkulka/averagecalculator-app --pull-policy=never
+          s2i build . quay.io/rh-ee-sakkulka/s2i-avg-builder quay.io/rh-ee-sakkulka/averagecalculator-app  
           podman push quay.io/rh-ee-sakkulka/averagecalculator-app
 
   create-pr:
