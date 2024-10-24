@@ -14,10 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         
-      - name: Generate changelog
-        run: |
-          make changelog | tee -a changelog
-          cat changelog
+      # - name: Generate changelog
+      #   run: |
+      #     make changelog | tee -a changelog
+      #     cat changelog
           
       - name: Set up Go
         uses: actions/setup-go@v4
@@ -51,6 +51,11 @@ jobs:
     name: Build S2I Application Image
     runs-on: ubuntu-latest
     steps:
+      # Install s2i
+      - name: Install s2i
+        run: |
+            go get github.com/openshift/source-to-image/cmd/s2i
+            sudo apt install source-to-image
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Build S2I Image
@@ -58,3 +63,25 @@ jobs:
           podman login quay.io -u ${{ secrets.QUAY_USERNAME }} -p ${{ secrets.QUAY_PASSWORD }}
           s2i build . quay.io/rh-ee-sakkulka/s2i-avg-builder quay.io/rh-ee-sakkulka/averageCalculator-app --pull-policy=never
           podman push quay.io/rh-ee-sakkulka/averageCalculator-app
+
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+        run: |
+          curl -X POST \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{
+            "title": "Merge changes from ops to main",
+            "head": "ops",  
+            "base": "main",  
+            "body": "This pull request merges changes from the ops branch into the main branch."
+          }' \
+          https://api.github.com/repos/${{ github.repository }}/pulls

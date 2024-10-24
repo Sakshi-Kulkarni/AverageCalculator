@@ -33,6 +33,10 @@ openshift-route:
 openshift-clean:
 	oc delete all --selector app=$(APP_NAME)
 
+ 
+# changelog:
+# 	sh changelog.sh
+
 help:
 	@echo "Makefile Help:"
 	@echo "  build             Build the Go application"
