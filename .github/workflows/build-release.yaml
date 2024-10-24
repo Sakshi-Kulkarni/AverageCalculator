@@ -58,8 +58,9 @@ jobs:
       # Install s2i
       - name: Install s2i
         run: |
-            go get github.com/openshift/source-to-image/cmd/s2i
-            sudo apt install source-to-image
+                wget https://github.com/openshift/source-to-image/releases/download/v1.3.1/source-to-image-v1.3.1-linux-amd64.tar.gz
+                tar -xvf source-to-image-v1.3.1-linux-amd64.tar.gz
+                sudo mv s2i /usr/local/bin/
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Build S2I Image
