@@ -20,7 +20,6 @@ podman-run:
 
 # Push podman --> quay.io
 quay-push:
-    podman login quay.io .
 	podman push $(IMAGE_NAME)
 
 # Deploy to OpenShift  
