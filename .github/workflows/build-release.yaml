@@ -67,8 +67,8 @@ jobs:
       - name: Build S2I Image
         run: |
           sudo docker login quay.io -u ${{ secrets.QUAY_USERNAME }} -p ${{ secrets.QUAY_PASSWORD }}
-          s2i build . quay.io/rh-ee-sakkulka/s2i-avg-builder quay.io/rh-ee-sakkulka/averagecalculator-app  
-          sudo docker push quay.io/rh-ee-sakkulka/averagecalculator-app
+          sudo s2i build . quay.io/rh-ee-sakkulka/s2i-avg-builder quay.io/rh-ee-sakkulka/averagecalculator-app  
+          sudo docker push quay.io/rh-ee-sakkulka/averagecalculator-app 
 
   create-pr:
     runs-on: ubuntu-latest
