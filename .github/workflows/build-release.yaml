@@ -69,18 +69,4 @@ jobs:
         run: |
           sudo docker login quay.io -u ${{ secrets.QUAY_USERNAME }} -p ${{ secrets.QUAY_PASSWORD }}
           sudo s2i build . quay.io/rh-ee-sakkulka/s2i-avg-builder quay.io/rh-ee-sakkulka/averagecalculator-app  
-          sudo docker push quay.io/rh-ee-sakkulka/averagecalculator-app 
-
-  create-pr:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Create Pull Request
-        env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
-        # run: |
-            #  curl -X POST -H "Authorization: Bearer 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" -H "Accept: application/vnd.github.v3+json" -d '{"title": "Second title", "head": "ops", "base": "main"}' https://api.github.com/repos/Sakshi-Kulkarni/AverageCalculator/pulls
-
+          sudo docker push quay.io/rh-ee-sakkulka/averagecalculator-app
