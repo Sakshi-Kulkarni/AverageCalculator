@@ -63,3 +63,29 @@ jobs:
           sudo docker login quay.io -u ${{ secrets.QUAY_USERNAME }} -p ${{ secrets.QUAY_PASSWORD }}
           sudo s2i build . quay.io/rh-ee-sakkulka/s2i-avg-builder quay.io/rh-ee-sakkulka/averagecalculator-app  
           sudo docker push quay.io/rh-ee-sakkulka/averagecalculator-app
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Authentication
+        uses: redhat-actions/oc-login@v1
+        env:
+          OPENSHIFT_USER: rh-ee-sakkulka
+          OPENSHIFT_NAMESPACE: rh-ee-sakkulka-dev
+        with:
+            openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
+            openshift_username: ${{ env.OPENSHIFT_USER }}
+            openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+            insecure_skip_tls_verify: false
+            namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+      - name: Deploy application
+        run: |
+            if oc get svc -l app=averagecalculator --ignore-not-found; then
+                oc delete svc,deployment,route,imagestream --selector app=averagecalculator
+                echo "deleted all resources with label app=averagecalculator";
+            fi
+            oc new-app quay.io/rh-ee-sakkulka/averagecalculator-app --name=averagecalculator --labels=app=averagecalculator,env=dev
+            sleep 3
+            oc expose svc averagecalculator --labels=averagecalculator
+            oc get routes -l app=averagecalculator
