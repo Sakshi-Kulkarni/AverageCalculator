@@ -45,6 +45,13 @@ jobs:
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
               --notes-file changelog
 
+      - name: Upload Artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release upload avg-${{ github.ref_name }}-x86_64 ${{ env.BIN_PATH }} --clobber
+
   s2i-build:
     name: Build S2I Application Image
     runs-on: ubuntu-latest
@@ -89,3 +96,26 @@ jobs:
             sleep 3
             oc expose svc averagecalculator --labels=averagecalculator
             oc get routes -l app=averagecalculator
+
+
+create-pr:
+  runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create Pull Request
+      env:
+        PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
+      run: |
+        curl -X POST \
+        -H "Authorization: token $PR_TOKEN" \
+        -H "Accept: application/vnd.github.v3+json" \
+        -d '{
+          "title": "Merge changes from ops to main",
+          "head": "features",  
+          "base": "ops",  
+          "body": "This pull request merges changes from the ops branch into the main branch."
+        }' \
+        https://api.github.com/repos/${{ github.repository }}/pulls
