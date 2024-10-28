@@ -113,7 +113,7 @@ jobs:
           PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
         run: |
           curl -X POST \
-          -H "Authorization: token $PR_TOKEN" \
+          -H "Authorization: token $PR_TOKEN_ID" \
           -H "Accept: application/vnd.github.v3+json" \
           -d '{
             "title": "Merge changes from ops to main",
