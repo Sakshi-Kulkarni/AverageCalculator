@@ -110,9 +110,10 @@ jobs:
   
       - name: Create Pull Request
         env:
-          PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }} 
+          PR_TOKEN_ID: ${{ secrets.SECRET_PR_TOKEN }} 
           
         run: |
+          echo $PR_TOKEN_ID
           curl -X POST \
           -H "Authorization: token $PR_TOKEN_ID" \
           -H "Accept: application/vnd.github.v3+json" \
