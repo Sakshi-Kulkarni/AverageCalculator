@@ -44,7 +44,10 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
               --notes-file changelog
-
+      - name: Set binary absolute path
+        run: |
+          binary_path=$(pwd)/main
+          echo "BIN_PATH=${binary_path}" >> $GITHUB_ENV
       - name: Upload Artifact
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -98,24 +101,23 @@ jobs:
             oc get routes -l app=averagecalculator
 
 
-create-pr:
-  runs-on: ubuntu-latest
-
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Create Pull Request
-      env:
-        PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
-      run: |
-        curl -X POST \
-        -H "Authorization: token $PR_TOKEN" \
-        -H "Accept: application/vnd.github.v3+json" \
-        -d '{
-          "title": "Merge changes from ops to main",
-          "head": "features",  
-          "base": "ops",  
-          "body": "This pull request merges changes from the ops branch into the main branch."
-        }' \
-        https://api.github.com/repos/${{ github.repository }}/pulls
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+      - name: Create Pull Request
+        env:
+          PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
+        run: |
+          curl -X POST \
+          -H "Authorization: token $PR_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{
+            "title": "Merge changes from ops to main",
+            "head": "features",  
+            "base": "ops",  
+            "body": "This pull request merges changes from the ops branch into the main branch."
+          }' \
+          https://api.github.com/repos/${{ github.repository }}/pulls
