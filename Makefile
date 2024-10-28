@@ -1,3 +1,5 @@
+.PHONY: changelog all build run 
+
 APP_NAME = averagecalculator
 IMAGE_NAME = quay.io/rh-ee-sakkulka/$(APP_NAME):latest
 
