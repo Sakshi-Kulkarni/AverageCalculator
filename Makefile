@@ -34,8 +34,8 @@ openshift-clean:
 	oc delete all --selector app=$(APP_NAME)
 
  
-# changelog:
-# 	sh changelog.sh
+changelog:
+	@hack/changelog.sh
 
 help:
 	@echo "Makefile Help:"
