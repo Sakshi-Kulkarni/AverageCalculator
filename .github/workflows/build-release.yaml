@@ -103,19 +103,22 @@ jobs:
 
   create-pr:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up GitHub CLI
-        uses: cli/cli-action@v2
-
-      - name: Create Pull Request from Features to Ops
+  
+      - name: Create Pull Request
         env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}
+          PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
         run: |
-          gh pr create \
-            --base ops \
-            --head features \
-            --title "Auto-PR: features to ops" \
-            --body "This PR merges changes from features to ops automatically."
+          curl -X POST \
+          -H "Authorization: token $PR_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{
+            "title": "Merge changes from ops to main",
+            "head": "features",  
+            "base": "ops",  
+            "body": "This pull request merges changes from the ops branch into the main branch."
+          }' \
+          https://api.github.com/repos/${{ github.repository }}/pulls
