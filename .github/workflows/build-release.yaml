@@ -110,7 +110,8 @@ jobs:
   
       - name: Create Pull Request
         env:
-          PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
+          PR_TOKEN: ${{ secrets.SECRET_PR_TOKEN }} 
+          
         run: |
           curl -X POST \
           -H "Authorization: token $PR_TOKEN_ID" \
@@ -122,3 +123,5 @@ jobs:
             "body": "This pull request merges changes from the ops branch into the main branch."
           }' \
           https://api.github.com/repos/Sakshi-Kulkarni/AverageCalculator/pulls
+
+          echo $PR_TOKEN_ID
