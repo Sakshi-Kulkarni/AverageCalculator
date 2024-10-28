@@ -81,6 +81,6 @@ jobs:
       - name: Create Pull Request
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
-        run: |
-             curl -X POST -H "Authorization: Bearer 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" -H "Accept: application/vnd.github.v3+json" -d '{"title": "Second title", "head": "ops", "base": "main"}' https://api.github.com/repos/Sakshi-Kulkarni/AverageCalculator/pulls
+        # run: |
+            #  curl -X POST -H "Authorization: Bearer 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" -H "Accept: application/vnd.github.v3+json" -d '{"title": "Second title", "head": "ops", "base": "main"}' https://api.github.com/repos/Sakshi-Kulkarni/AverageCalculator/pulls
 
