@@ -40,18 +40,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
         run: |
-          # cat changelog
-          gh release create avg-${{ github.ref_name }}-x86_64 \
+           gh release create avg-${{ github.ref_name }}-x86_64 \
               --repo="$GITHUB_REPOSITORY" \
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
               --notes-file changelog
               
-      - name: Upload Artifact
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-        run: |
-          gh release upload avg-${{ github.ref_name }}-x86_64 ${{ env.BIN_PATH }} --clobber
+      # - name: Upload Artifact
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     tag: ${{ github.ref_name }}
+      #   run: |
+      #     gh release upload avg-${{ github.ref_name }}-x86_64 ${{ env.BIN_PATH }} --clobber
 
   s2i-build:
     name: Build S2I Application Image
@@ -83,13 +82,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_PR_TOKEN }}  
         run: |
-          curl -X POST \
-          -H "Authorization: token $PR_TOKEN" \
-          -H "Accept: application/vnd.github.v3+json" \
-          -d '{
-            "title": "Merge changes from ops to main",
-            "head": "ops",  
-            "base": "main",  
-            "body": "This pull request merges changes from the ops branch into the main branch."
-          }' \
-          https://api.github.com/repos/${{ github.repository }}/pulls
+             curl -X POST -H "Authorization: Bearer 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" -H "Accept: application/vnd.github.v3+json" -d '{"title": "Second title", "head": "ops", "base": "main"}' https://api.github.com/repos/Sakshi-Kulkarni/AverageCalculator/pulls
+
