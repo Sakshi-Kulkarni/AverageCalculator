@@ -110,7 +110,7 @@ jobs:
   
       - name: Create Pull Request
         env:
-          PR_TOKEN_ID: ${{ secrets.SECRET_PR_TOKEN }} 
+          PR_TOKEN_ID: ${{ secrets.PR_TOKEN }} 
           
         run: |
           echo $PR_TOKEN_ID
@@ -125,4 +125,4 @@ jobs:
           }' \
           https://api.github.com/repos/Sakshi-Kulkarni/AverageCalculator/pulls
 
-          echo $PR_TOKEN_ID
+        
