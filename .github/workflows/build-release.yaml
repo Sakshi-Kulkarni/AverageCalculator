@@ -66,7 +66,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: Build
     steps:
       - name: Authentication
         uses: redhat-actions/oc-login@v1
