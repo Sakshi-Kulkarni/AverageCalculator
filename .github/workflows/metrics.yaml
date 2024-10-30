@@ -1,34 +1,65 @@
-name: Build and Collect Metrics
-on:
-  push:
-    branches:
-      - main
-      - ops
-  pull_request:
+# name: Build and Collect Metrics
+# on:
+#   push:
+#     branches:
+#       - main
+#       - ops
+#   pull_request:
+
+# jobs:
+#   build-metrics:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#       - name: Set up Go
+#         uses: actions/setup-go@v4
+#         with:
+#           go-version: '1.21'
+
+#       - name: Run Tests and Capture Code Coverage
+#         run: |
+#           go test ./... -v
+#           go test -coverprofile=coverage.out ./...
+#           go tool cover -func=coverage.out | tail -n 1 | awk '{print $3}' > coverage.txt
+ 
+#       - name: Read Coverage and Capture Build Duration
+#         id: metrics
+#         run: |
+#           start_time=$(date +%s)
+#           end_time=$(date +%s)
+#           build_duration=$((end_time - start_time))
+#           code_coverage=$(cat coverage.txt)
+#           echo "build_duration=$build_duration" >> $GITHUB_ENV
+#           echo "code_coverage=$code_coverage" >> $GITHUB_ENV
+
+name: Matrix Build Workflow
+on: [push, pull_request]
 
 jobs:
-  build-metrics:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        go-version: ['1.18', '1.19', '1.20']
+        architecture: [amd64, arm64]
+        include:
+          - os: ubuntu-latest
+            go-version: '1.18'
+            architecture: amd64
+          - os: windows-latest
+            go-version: '1.19'
+            architecture: arm64
+      fail-fast: false   # Allows other jobs to continue if one fails
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.21'
+          go-version: ${{ matrix.go-version }}
 
-      - name: Run Tests and Capture Code Coverage
-        run: |
-          go test ./... -v
-          go test -coverprofile=coverage.out ./...
-          go tool cover -func=coverage.out | tail -n 1 | awk '{print $3}' > coverage.txt
- 
-      - name: Read Coverage and Capture Build Duration
-        id: metrics
-        run: |
-          start_time=$(date +%s)
-          end_time=$(date +%s)
-          build_duration=$((end_time - start_time))
-          code_coverage=$(cat coverage.txt)
-          echo "build_duration=$build_duration" >> $GITHUB_ENV
-          echo "code_coverage=$code_coverage" >> $GITHUB_ENV
+      - name: Run Tests
+        run: go test -v ./...
