@@ -1,0 +1,31 @@
+name: create PR
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - ops   
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+      - name: Create Pull Request
+        env:
+          PR_TOKEN_ID: ${{ secrets.PR_TOKEN }} 
+          
+        run: |
+          echo $PR_TOKEN_ID
+          curl -X POST \
+          -H "Authorization: token $PR_TOKEN_ID" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{
+            "title": "Merge changes from ops to main",
+            "head": "ops",  
+            "base": "main",  
+            "body": "This pull request merges changes from the ops branch into the main branch."
+          }' \
+          https://api.github.com/repos/Sakshi-Kulkarni/AverageCalculator/pulls

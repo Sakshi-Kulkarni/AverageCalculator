@@ -26,3 +26,5 @@ func isDigits(s string) bool {
 }
 
 //gerics and string 
+// dependancy injection
+// linked list stack queue

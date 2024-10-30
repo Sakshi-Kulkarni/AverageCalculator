@@ -1,3 +1,5 @@
+.PHONY: changelog all build run 
+
 APP_NAME = averagecalculator
 IMAGE_NAME = quay.io/rh-ee-sakkulka/$(APP_NAME):latest
 
@@ -32,6 +34,10 @@ openshift-route:
 
 openshift-clean:
 	oc delete all --selector app=$(APP_NAME)
+
+ 
+changelog:
+	@hack/changelog.sh
 
 help:
 	@echo "Makefile Help:"
