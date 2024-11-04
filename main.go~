@@ -11,5 +11,5 @@ func main() {
 	http.HandleFunc("/average", handler.AverageHandler)
 	log.Println("server started at :9901")
 	log.Fatal(http.ListenAndServe(":9901", nil))
-	log.Println("another change")
+	log.Println("")
 }
