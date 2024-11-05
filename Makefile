@@ -14,6 +14,7 @@ run: build
 test:
 	go test ./... -v
 
+#podman build step
 podman-build:
 	podman build -t $(IMAGE_NAME) .
 
