@@ -17,7 +17,7 @@ test:
 #podman build step
 podman-build:
 	podman build -t $(IMAGE_NAME) .
-
+# podman run
 podman-run:
 	podman run -p 8080:9901 $(IMAGE_NAME)
 
